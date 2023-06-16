@@ -1,7 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"WBL0/internal/app"
+
+	_ "github.com/lib/pq"
+)
 
 func main() {
-	fmt.Println("hello world!")
+	app.Run()
 }
