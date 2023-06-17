@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <form>
+        <p><input placeholder="UID" name="uid"></p>
+        <p><input type="submit" value="Отправить"
+                  formaction="/api/v1/order/" formmethod="get"></p>
+    </form>
+</div>
+
+<div>
+    <h2>UID Заказа</h2>
+    <h4>{{ .UID }}</h4>
+    <hr>
+    <h2>TrackNumber Заказа</h2>
+    <h4>{{ .TrackNumber }}</h4>
+    <hr>
+    <h2>Address Заказа</h2>
+    <h4>{{ .Address }}</h4>
+    <hr>
+    <h2>Amount Заказа</h2>
+    <h4>{{ .Amount }}</h4>
+    <hr>
+</div>
+</body>
+</html>

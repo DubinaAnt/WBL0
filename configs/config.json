@@ -3,16 +3,16 @@
   "host": "localhost",
   "port": "5432",
   "username": "wbuser",
-  "password": "goodpassword",
-  "dbname": "wb",
+  "password": "goodpass",
+  "dbname": "wbl0",
   "sslmode": "disable"
 },
 "httpserver": {
   "port": "8000"
 },
-"nuts": {
+"nats": {
   "stanclusterid": "prod",
-  "clientid": "sub-1",
+  "clientid": "sub",
   "durablename": "stand1",
   "chanel": "order"
 }
