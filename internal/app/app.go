@@ -36,11 +36,8 @@ func Run() {
 	cache := cache.NewCache(5*time.Minute, 10*time.Minute)
 	service := service.NewService(repos, cache)
 	handler := handler.NewHandler(service)
+
 	natsConnect, err := nats.NewConnection()
-	if err := initConfig(); err != nil {
-		log.Fatalf("init config error: %s", err.Error())
-	}
-	newNatsConnect, err := nats.NewConnection()
 	if err != nil {
 		log.Fatalf("nats connection error: %s", err.Error())
 	}
@@ -49,7 +46,7 @@ func Run() {
 		if err != nil {
 			log.Printf("close nats error: %s", err.Error())
 		}
-	}(newNatsConnect)
+	}(natsConnect)
 	nats.NewNatsSubscriber(natsConnect, repos, cache)
 
 	server := new(Server)
