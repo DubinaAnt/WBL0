@@ -4,7 +4,7 @@
   "port": "5432",
   "username": "wbuser",
   "password": "goodpass",
-  "dbname": "wbl0",
+  "dbname": "test",
   "sslmode": "disable"
 },
 "httpserver": {

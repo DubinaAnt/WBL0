@@ -32,12 +32,12 @@ func Run() {
 		log.Fatalf("init db error: %s", err.Error())
 	}
 
-	repos := repository.NewRepository(dataBase)
-	cache := cache.NewCache(5*time.Minute, 10*time.Minute)
-	service := service.NewService(repos, cache)
-	handler := handler.NewHandler(service)
+	newRepos := repository.NewRepository(dataBase)
+	newCache := cache.NewCache(5*time.Minute, 10*time.Minute)
+	newService := service.NewService(newRepos, newCache)
+	newHandler := handler.NewHandler(newService)
 
-	natsConnect, err := nats.NewConnection()
+	newNatsConnect, err := nats.NewConnection()
 	if err != nil {
 		log.Fatalf("nats connection error: %s", err.Error())
 	}
@@ -46,11 +46,11 @@ func Run() {
 		if err != nil {
 			log.Printf("close nats error: %s", err.Error())
 		}
-	}(natsConnect)
-	nats.NewNatsSubscriber(natsConnect, repos, cache)
+	}(newNatsConnect)
+	nats.NewNatsSubscriber(newNatsConnect, newRepos, newCache)
 
 	server := new(Server)
-	err = server.Run(viper.GetString("httpserver.port"), handler.InitRoutes())
+	err = server.Run(viper.GetString("httpserver.port"), newHandler.InitRoutes())
 	if err != nil {
 		log.Fatalf("start http server error: %s", err.Error())
 	}

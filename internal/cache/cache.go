@@ -37,8 +37,8 @@ func NewCache(defaultExpiration, cleanupInterval time.Duration) *Cache {
 
 func (c *Cache) Set(key string, value model.Order) {
 
-	//var expiration int64
-	expiration := time.Now().Add(c.defaultExpiration).UnixNano()
+	var expiration int64
+	expiration = time.Now().Add(c.defaultExpiration).UnixNano()
 
 	c.Lock()
 
@@ -56,7 +56,7 @@ func (c *Cache) Get(key string) (model.Order, bool) {
 
 	c.RLock()
 
-	defer c.RLock()
+	defer c.RUnlock()
 
 	item, found := c.items[key]
 
